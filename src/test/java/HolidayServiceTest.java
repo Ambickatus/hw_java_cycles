@@ -1,21 +1,14 @@
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
 import ru.netology.services.HolidayService;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 
 public class HolidayServiceTest {
-    @Test
-    void testExample1() {
+    @ParameterizedTest
+    @CsvFileSource(files = "src/test/resources/info.csv")
+    void testExample(int expected, int income, int expense, int threshold) {
         HolidayService service = new HolidayService();
-        int expected = 3;
-        int actual = service.calculate(10000, 3000, 20000);
-        Assertions.assertEquals(expected, actual);
-    }
-
-    @Test
-    void testExample2() {
-        HolidayService service = new HolidayService();
-        int expected = 2;
-        int actual = service.calculate(100000, 60000, 150000);
+        int actual = service.calculate(income, expense, threshold);
         Assertions.assertEquals(expected, actual);
     }
 }
